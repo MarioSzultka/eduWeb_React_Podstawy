@@ -1,0 +1,40 @@
+.wrapper {
+
+  width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form {
+
+  margin: 0 auto;
+  width: 40vw;
+}
+
+.form input,
+.form textarea {
+
+  display: inline-block;
+  width: 40%;
+  margin: 0 auto;
+  height: 40px;
+  margin-top: 5px;
+
+  border-style: hidden;
+  border-bottom-style: groove;
+  border-bottom: solid 2px;
+
+  vertical-align: text-bottom;
+
+}
+
+.form button {
+
+  display: block;
+
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 2px;
+  background-color: none;
+
+}

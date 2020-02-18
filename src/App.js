@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ListWrapper from './components/ListWrapper/ListWrapper'
-import PropTypes from 'prop-types'
-import Form from './components/Form'
+import Form from './components/Form/Form'
 import './index.css'
 
 const initialStateItems = [
@@ -36,105 +35,47 @@ class App extends Component {
 
     state = {
         items: [...initialStateItems],
-        newItem: {
-            image: '',
-            name: '',
-            description: '',
-            link: '',
-
-        }
 
     }
+
 
     addItem = (e) => {
 
         e.preventDefault()
+        const { target } = e
 
-        const { name, value } = e.target
+        const newItem = {
 
-        if (name === "name") {
-
-            this.state.newItem.name = value
-
-            this.setState({
-
-                newItem: { ...this.state.newItem }
-            })
-
-        } else if (name === "link") {
-
-            this.state.newItem.link = value
-
-            this.setState({
-
-                newItem: { ...this.state.newItem }
-            })
-
-        } else if (name === "description") {
-
-            this.state.newItem.description = value
-
-            this.setState({
-
-                newItem: { ...this.state.newItem }
-            })
-
-        } else if (name === "image") {
-
-            this.state.newItem.image = value
-
-            this.setState({
-
-                newItem: { ...this.state.newItem }
-            })
+            name: target[0].value === "" ? null : target[0].value,
+            twitterLink: target[1].value,
+            image: target[2].value,
+            description: target[3].value,
 
         }
 
+        console.log(newItem)
+        console.log(newItem.image === true)
+
+        // newItem.image ? console.log("prawda") : console.log("falsz")
+
+        this.setState(prevState => ({
+
+            items: [...prevState.items, newItem]
+
+        }))
+
+        e.target.reset()
     }
 
-    handleState = () => {
-
-        this.state.items.push(this.state.newItem)
-
-        this.setState({
-
-            items: this.state.items,
-            newItem: {
-                image: '',
-                name: '',
-                description: '',
-                link: '',
-
-            }
-
-        })
-
-    }
 
     render() {
         return (
-
-            <>
-                <div className="wrapper">
-                    <ListWrapper items={this.state.items} />
-                    <Form submitFn={this.addItem} handle={this.handleState} state={this.state.newItem} />
-                </div>
-
-
-            </>
-
+            <div className="wrapper">
+                <ListWrapper items={this.state.items} />
+                <Form submitFn={this.addItem} />
+            </div>
         )
     }
-
-
-
-
-}
-
-App.propTypes = {
-
-
-
 }
 
 export default App;
