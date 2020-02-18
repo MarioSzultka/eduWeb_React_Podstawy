@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListWrapper from './components/ListWrapper/ListWrapper'
+import PropTypes from 'prop-types'
 import Form from './components/Form'
 import './index.css'
 
@@ -34,16 +35,14 @@ const initialStateItems = [
 class App extends Component {
 
     state = {
-        items: [...initialStateItems]
+        items: [...initialStateItems],
+        newItem: {
+            image: '',
+            name: '',
+            description: '',
+            link: '',
 
-    }
-
-    newItem = {
-
-        image: '',
-        name: '',
-        description: '',
-        twitterLink: '',
+        }
 
     }
 
@@ -55,19 +54,39 @@ class App extends Component {
 
         if (name === "name") {
 
-            this.newItem.name = value
+            this.state.newItem.name = value
+
+            this.setState({
+
+                newItem: { ...this.state.newItem }
+            })
 
         } else if (name === "link") {
 
-            this.newItem.twitterLink = value
+            this.state.newItem.link = value
+
+            this.setState({
+
+                newItem: { ...this.state.newItem }
+            })
 
         } else if (name === "description") {
 
-            this.newItem.description = value
+            this.state.newItem.description = value
+
+            this.setState({
+
+                newItem: { ...this.state.newItem }
+            })
 
         } else if (name === "image") {
 
-            this.newItem.image = value
+            this.state.newItem.image = value
+
+            this.setState({
+
+                newItem: { ...this.state.newItem }
+            })
 
         }
 
@@ -75,26 +94,30 @@ class App extends Component {
 
     handleState = () => {
 
-        this.state.items.push(this.newItem)
-
+        this.state.items.push(this.state.newItem)
 
         this.setState({
 
-            items: this.state.items
+            items: this.state.items,
+            newItem: {
+                image: '',
+                name: '',
+                description: '',
+                link: '',
+
+            }
+
         })
 
     }
 
     render() {
-
-
-
         return (
 
             <>
                 <div className="wrapper">
                     <ListWrapper items={this.state.items} />
-                    <Form submitFn={this.addItem} handle={this.handleState} />
+                    <Form submitFn={this.addItem} handle={this.handleState} state={this.state.newItem} />
                 </div>
 
 
@@ -102,6 +125,15 @@ class App extends Component {
 
         )
     }
+
+
+
+
+}
+
+App.propTypes = {
+
+
 
 }
 
